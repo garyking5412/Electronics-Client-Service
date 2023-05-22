@@ -1,12 +1,23 @@
 package com.example.electronicsspringbootclientservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
-//@Entity
-//@Table(name="Product")
-//@Data
-//public class Category {
-//
-//}
+import java.util.List;
+
+@Entity
+@Table(name="category")
+@Data
+public class Category {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name="CategoryId")
+    private int CategoryId;
+    @Column(name = "CategoryName")
+    private String CategoryName;
+    @Column(name = "CategoryDetail")
+    private String CategoryDetail;
+    @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
+    private List<Product> productList;
+}

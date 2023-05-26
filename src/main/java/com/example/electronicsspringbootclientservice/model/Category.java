@@ -1,5 +1,6 @@
 package com.example.electronicsspringbootclientservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,5 +20,6 @@ public class Category {
     @Column(name = "CategoryDetail")
     private String CategoryDetail;
     @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Product> productList;
 }

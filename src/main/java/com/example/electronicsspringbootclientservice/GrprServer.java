@@ -4,6 +4,8 @@ import com.example.electronicsspringbootclientservice.gRPCService.PingService;
 import com.example.electronicsspringbootclientservice.gRPCService.ProductGRPCServiceImpl;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
+import org.lognet.springboot.grpc.autoconfigure.OnGrpcServerEnabled;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.List;
 
 @Component
 public class GrprServer {
@@ -28,10 +31,13 @@ public class GrprServer {
     //    @PostConstruct
     @Async
     @EventListener(ApplicationStartedEvent.class)
+    @OnGrpcServerEnabled
     public void startGrpcServer() throws InterruptedException, IOException {
-        Server server = ServerBuilder.forPort(3006).addService(pingService).addService(productGRPCService).build();
+        Server server = NettyServerBuilder.forPort(3004).addService(pingService).addService(productGRPCService).build();
+//        Server server = ServerBuilder.forPort(3004).addService(pingService).addService(productGRPCService).build();
         server.start();
         logger.info("gRPC Server is listening on port: " + server.getPort());
         server.awaitTermination();
     }
+
 }

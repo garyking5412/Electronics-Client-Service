@@ -39,11 +39,11 @@ public class ElectronicsSpringBootClientServiceApplication {
 
     @Bean
     NewTopic invoiceRequest(){
-        return new NewTopic("invoice",2,(short) 1);
+        return new NewTopic("invoice",2,(short) 3);
     }
     @Bean
     NewTopic message(){
-        return new NewTopic("notification",3,(short)1);
+        return new NewTopic("notification",3,(short)3);
     }
 
 }

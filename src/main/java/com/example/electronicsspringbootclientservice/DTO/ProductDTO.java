@@ -1,7 +1,7 @@
 package com.example.electronicsspringbootclientservice.DTO;
 
 import com.example.electronicsspringbootclientservice.model.Category;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 
 @Data

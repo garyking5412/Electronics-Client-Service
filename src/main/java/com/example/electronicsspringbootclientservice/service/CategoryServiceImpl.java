@@ -3,7 +3,7 @@ package com.example.electronicsspringbootclientservice.service;
 import com.example.electronicsspringbootclientservice.DTO.CategoryDTO;
 import com.example.electronicsspringbootclientservice.model.Category;
 import com.example.electronicsspringbootclientservice.repository.CategoryRepository;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;

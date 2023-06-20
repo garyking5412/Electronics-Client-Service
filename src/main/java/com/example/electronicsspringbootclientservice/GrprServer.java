@@ -21,8 +21,8 @@ import java.util.List;
 @Component
 public class GrprServer {
 
-    @Autowired
-    private PingService pingService;
+//    @Autowired
+//    private PingService pingService;
 
     @Autowired
     private ProductGRPCServiceImpl productGRPCService;
@@ -30,13 +30,13 @@ public class GrprServer {
 
     //    @PostConstruct
     @Async
-    @EventListener(ApplicationStartedEvent.class)
+//    @EventListener(ApplicationStartedEvent.class)
     @OnGrpcServerEnabled
     public void startGrpcServer() throws InterruptedException, IOException {
-        Server server = NettyServerBuilder.forPort(3004).addService(pingService).addService(productGRPCService).build();
+        Server server = NettyServerBuilder.forPort(3004).addService(productGRPCService).build();
 //        Server server = ServerBuilder.forPort(3004).addService(pingService).addService(productGRPCService).build();
         server.start();
-        logger.info("gRPC Server is listening on port: " + server.getPort());
+        logger.info("gRPC Server is listening on netty server port: " + server.getPort());
         server.awaitTermination();
     }
 

@@ -1,19 +1,19 @@
 package com.example.electronicsspringbootclientservice.gRPCService;
 
+import com.example.electronicsspringbootclientservice.*;
 import com.example.electronicsspringbootclientservice.DTO.ProductDTO;
-import com.example.electronicsspringbootclientservice.GetProductByIdRequest;
-import com.example.electronicsspringbootclientservice.GetProductByIdResponse;
-import com.example.electronicsspringbootclientservice.StudentServiceGrpc;
+//import com.example.electronicsspringbootclientservice.StudentServiceGrpc;
 import com.example.electronicsspringbootclientservice.service.ProductService;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.Objects;
 
 @GRpcService
-public class ProductGRPCServiceImpl extends StudentServiceGrpc.StudentServiceImplBase {
+public class ProductGRPCServiceImpl extends PingServiceGrpc.PingServiceImplBase {
 
     @Autowired
     private ProductService productService;
@@ -36,5 +36,12 @@ public class ProductGRPCServiceImpl extends StudentServiceGrpc.StudentServiceImp
             return false;
         }
         return true;
+    }
+    @Override
+    public void ping(PingRequest request, StreamObserver<PingResponse> responseObserver) {
+        PingResponse response = PingResponse.newBuilder().setMessage(">>>>>PongKai>>>>>>").setTime(new Date().toString()).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+//        super.ping(request, responseObserver);
     }
 }

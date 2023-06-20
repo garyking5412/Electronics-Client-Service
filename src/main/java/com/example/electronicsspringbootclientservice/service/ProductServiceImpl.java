@@ -3,7 +3,7 @@ package com.example.electronicsspringbootclientservice.service;
 import com.example.electronicsspringbootclientservice.DTO.ProductDTO;
 import com.example.electronicsspringbootclientservice.model.Product;
 import com.example.electronicsspringbootclientservice.repository.ProductRepository;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

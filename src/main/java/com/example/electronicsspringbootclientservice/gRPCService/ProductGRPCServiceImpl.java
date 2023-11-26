@@ -25,7 +25,8 @@ public class ProductGRPCServiceImpl extends PingServiceGrpc.PingServiceImplBase 
         System.out.println("Processing request from " + clientId);
         ProductDTO dto = productService.getProductById(request.getProductId());
         if (validateProductQueryOutput(dto)) {
-            GetProductByIdResponse response = GetProductByIdResponse.newBuilder().setProductId(dto.getProductId()).setProductName(dto.getProductName()).setProductCategoryName(dto.getCategory()).setProductPrice(dto.getProductPrice()).build();
+//            GetProductByIdResponse response = GetProductByIdResponse.newBuilder().setProductId(dto.getProductId()).setProductName(dto.getProductName()).setProductCategoryName(dto.getCategory()).setProductPrice(dto.getProductPrice()).build();
+            GetProductByIdResponse response = GetProductByIdResponse.newBuilder().setProductId(dto.getProductId()).setProductName(dto.getProductName()).build();
             responseObserver.onNext(response);
             responseObserver.onCompleted();
         } else {
@@ -35,11 +36,15 @@ public class ProductGRPCServiceImpl extends PingServiceGrpc.PingServiceImplBase 
     }
 
     public boolean validateProductQueryOutput(ProductDTO dto) {
-        if (Objects.isNull(dto.getProductId()) || Objects.isNull(dto.getProductName()) || Objects.isNull(dto.getCategory()) || Objects.isNull(dto.getProductPrice())) {
+//        if (Objects.isNull(dto.getProductId()) || Objects.isNull(dto.getProductName()) || Objects.isNull(dto.getCategory()) || Objects.isNull(dto.getProductPrice())) {
+//            return false;
+//        }
+        if (Objects.isNull(dto.getProductId()) || Objects.isNull(dto.getProductName()) || Objects.isNull(dto.getProductPrice())) {
             return false;
         }
         return true;
     }
+
     @Override
     public void ping(PingRequest request, StreamObserver<PingResponse> responseObserver) {
         String clientId = Constants.CLIENT_ID_CONTEXT_KEY.get();

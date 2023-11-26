@@ -6,8 +6,16 @@ import java.util.List;
 
 public interface ProductService {
     List<ProductDTO> getAllProducts();
+
     ProductDTO getProductById(Integer prodId);
+
     ProductDTO insert(ProductDTO productDTO);
+
     ProductDTO update(ProductDTO productDTO);
+
     void delete(Integer prodId);
+
+    void saveAll(List<ProductDTO> dtos);
+
+    boolean deleteAllProduct();
 }

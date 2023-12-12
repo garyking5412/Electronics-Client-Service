@@ -5,12 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 import lombok.Data;
+import org.springframework.data.redis.core.RedisHash;
 
 import java.util.List;
 
 @Entity
 @Table(name = "category")
 @Data
+@RedisHash("Category")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,6 +6,7 @@ import com.example.electronicsspringbootclientservice.repository.ProductReposito
 
 import javax.transaction.Transactional;
 
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private RedisService redisService;
+
+    @Autowired
+    private RabbitMQService rabbitMQService;
+
+    @Autowired
+    private Gson gsonTemplate;
 
     @Override
     public List<ProductDTO> getAllProducts() {
@@ -53,7 +60,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO insert(ProductDTO productDTO) {
-        return null;
+        return productDTO;
     }
 
     @Override
@@ -77,6 +84,7 @@ public class ProductServiceImpl implements ProductService {
         savedProducts.stream().map(ProductDTO::new).forEach(dto -> {
             redisService.saveProduct(dto);
         });
+        savedProducts.forEach(product -> rabbitMQService.send(gsonTemplate.toJson(product)));
     }
 
     @Override

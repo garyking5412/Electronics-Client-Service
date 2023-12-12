@@ -15,6 +15,9 @@ public class Constants {
     public static final int MAX_EXCEL_ROW = 2000;
     public static final String PRODUCT_KEY = "PRODUCT";
 
+    public static final String rabbitTopicExchangeName = "spring-boot-rabbitFanoutExchange";
+    public static final String rabbitTopicRetryExchangeName = "spring-boot-rabbitTopicRetryExchangeName";
+
     private Constants() {
         throw new AssertionError();
     }

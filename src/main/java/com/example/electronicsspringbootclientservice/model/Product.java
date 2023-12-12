@@ -7,6 +7,9 @@ import com.example.electronicsspringbootclientservice.DTO.ProductDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.Date;
 
@@ -30,8 +33,10 @@ public class Product {
     private String ProductImage;
     @Column(name = "createdDate")
     private Date createdDate;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cateId")
+    @Fetch(value = FetchMode.JOIN)
+    @BatchSize(size = 50)
     private Category category;
 
     public Product(ProductDTO dto) {

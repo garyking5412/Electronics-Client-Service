@@ -1,16 +1,14 @@
 package com.example.electronicsspringbootclientservice.model;
 
 
-import javax.persistence.*;
-
 import com.example.electronicsspringbootclientservice.DTO.ProductDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity

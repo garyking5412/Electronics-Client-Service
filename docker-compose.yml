@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: my-postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 2716
+      POSTGRES_DB: mydatabase
+    networks:
+      - docker_network
+    ports:
+      - "5433:5433"
+  app:
+    build: .
+    container_name: electronics-client
+    networks:
+      - docker-network
+    ports:
+      - "3001:3001"
+    depends_on:
+      - postgres
+networks:
+  docker-network:
+    driver: bridge

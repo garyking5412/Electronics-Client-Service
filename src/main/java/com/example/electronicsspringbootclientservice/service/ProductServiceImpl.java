@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ModelMapper mapper;
 
-    @Autowired
+//    @Autowired
     private RedisService redisService;
 
     @Autowired

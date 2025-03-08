@@ -1,9 +1,13 @@
 package com.example.electronicsspringbootclientservice.controller;
 
+import com.example.electronicsspringbootclientservice.CategoryRequest;
+import com.example.electronicsspringbootclientservice.CategoryResponse;
 import com.example.electronicsspringbootclientservice.DTO.CategoryDTO;
+import com.example.electronicsspringbootclientservice.gRPCService.CategoryGRPCClientImpl;
+import com.example.electronicsspringbootclientservice.model.Category;
 import com.example.electronicsspringbootclientservice.service.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +16,14 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping(value = "/category")
 public class CategoryController {
 
-    @Autowired
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
+
+    private final CategoryGRPCClientImpl categoryGRPCService;
+    private final ModelMapper modelMapper;
 
     @GetMapping("/getAll")
     public ResponseEntity<List<CategoryDTO>> getAll() {
@@ -26,12 +33,14 @@ public class CategoryController {
 
     @GetMapping("/getById/{id}")
     public ResponseEntity<CategoryDTO> getById(@PathVariable(name = "id") Integer id) {
-        try {
-            CategoryDTO result = categoryService.getCategoryById(id);
-            return ResponseEntity.status(HttpStatus.OK).body(result);
-        } catch (ChangeSetPersister.NotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.getCategoryById(id));
+    }
+
+    @GetMapping("/getById/grpc/{id}")
+    public ResponseEntity<Category> getByIdGRpc(@PathVariable(name = "id") Integer id) {
+        CategoryRequest request = CategoryRequest.newBuilder().setId(id).build();
+        CategoryResponse response = categoryGRPCService.getCategory(request);
+        return ResponseEntity.status(HttpStatus.OK).body(modelMapper.map(response, Category.class));
     }
 
     @PostMapping("/insert")

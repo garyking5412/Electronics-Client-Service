@@ -13,14 +13,14 @@ spring:
     allow-circular-references: true
 
   grpc:
-    enabled: true
-    port: 1900
+#    enabled: true
+#    port: 1900
     #validation:
     #interceptor-order: 10
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://host.docker.internal:5432/postgres
     username: postgres
     password: 2716
 

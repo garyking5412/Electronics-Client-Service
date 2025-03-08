@@ -26,3 +26,17 @@ message GetProductByIdResponse{
   int64 productPrice = 3;
   string productCategoryName = 4;
 }
+
+service CategoryService {
+  rpc GetCategory(CategoryRequest) returns (CategoryResponse);
+}
+
+message CategoryResponse {
+  int32 id = 1;
+  string name = 2;
+  string detail = 3;
+}
+
+message CategoryRequest {
+  int32 id = 1;
+}

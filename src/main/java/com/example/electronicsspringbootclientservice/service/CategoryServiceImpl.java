@@ -44,8 +44,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDTO getCategoryById(Integer cateId) throws ChangeSetPersister.NotFoundException {
-        Category category = categoryRepository.findById(cateId).orElseThrow(ChangeSetPersister.NotFoundException::new);
+    public CategoryDTO getCategoryById(Integer cateId) {
+        Category category = categoryRepository.findById(cateId).orElse(null);
         CategoryDTO dto = new CategoryDTO();
         modelMapper.map(category, dto);
         return dto;

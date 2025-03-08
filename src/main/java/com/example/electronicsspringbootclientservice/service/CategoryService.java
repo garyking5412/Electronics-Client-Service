@@ -9,7 +9,7 @@ import java.util.List;
 public interface CategoryService {
     List<CategoryDTO> getAllCategories();
 
-    CategoryDTO getCategoryById(Integer cateId) throws ChangeSetPersister.NotFoundException;
+    CategoryDTO getCategoryById(Integer cateId);
 
     CategoryDTO insert(CategoryDTO categoryDTO);
 

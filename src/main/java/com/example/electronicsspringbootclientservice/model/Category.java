@@ -22,7 +22,7 @@ public class Category {
     private String name;
     @Column(name = "detail")
     private String detail;
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Product> productList;
 }

@@ -1,26 +1,34 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:latest
-    container_name: my-postgres
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: 2716
-      POSTGRES_DB: mydatabase
-    networks:
-      - docker_network
-    ports:
-      - "5433:5433"
-  app:
-    build: .
+  #  postgres:
+  #    image: postgres:latest
+  #    container_name: my-postgres
+  #    environment:
+  #      POSTGRES_USER: user
+  #      POSTGRES_PASSWORD: 2716
+  #      POSTGRES_DB: mydatabase
+  #    networks:
+  #      - docker_network
+  #    ports:
+  #      - "5433:5433"
+  spring-boot-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: electronics-client
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=2716
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
     networks:
-      - docker-network
+      - docker_internal_network
     ports:
-      - "3001:3001"
-    depends_on:
-      - postgres
+      - "8080:3001"
+      - "50052:50052"
+#    depends_on:
+#      - postgres
 networks:
-  docker-network:
-    driver: bridge
+  docker_internal_network:
+    external: true

@@ -6,6 +6,8 @@ import com.example.electronicsspringbootclientservice.DTO.CategoryDTO;
 import com.example.electronicsspringbootclientservice.gRPCService.CategoryGRPCClientImpl;
 import com.example.electronicsspringbootclientservice.model.Category;
 import com.example.electronicsspringbootclientservice.service.CategoryService;
+import com.example.electronicsspringbootclientservice.service.WebSocketService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -21,7 +23,7 @@ import java.util.List;
 public class CategoryController {
 
     private final CategoryService categoryService;
-
+    private final WebSocketService webSocketService;
     private final CategoryGRPCClientImpl categoryGRPCService;
     private final ModelMapper modelMapper;
 
@@ -29,6 +31,11 @@ public class CategoryController {
     public ResponseEntity<List<CategoryDTO>> getAll() {
         List<CategoryDTO> result = categoryService.getAllCategories();
         return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @PostMapping("/web-socket/create")
+    public void createViaWebSocket() throws JsonProcessingException {
+        webSocketService.createCategory();
     }
 
     @GetMapping("/getById/{id}")

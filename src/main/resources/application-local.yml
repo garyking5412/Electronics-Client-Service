@@ -27,7 +27,7 @@ spring:
   jpa:
     properties:
       hibernate:
-        default_schema: local
+        default_schema: public
         format_sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:

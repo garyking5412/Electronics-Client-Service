@@ -27,10 +27,10 @@ public class GrpcServer {
     @EventListener(ApplicationStartedEvent.class)
     public void startGrpcServer() throws InterruptedException, IOException {
         logger.info("Starting gRPC Additional Server >>");
-        server = ServerBuilder.forPort(50052).addService(categoryGRPCServer).addService(productGRPCService).build();
-        server.start();
-        logger.info("gRPC Additional Server is listening on netty server port: {}", server.getPort());
-        server.awaitTermination();
+//        server = ServerBuilder.forPort(50052).addService(categoryGRPCServer).addService(productGRPCService).build();
+//        server.start();
+//        logger.info("gRPC Additional Server is listening on netty server port: {}", server.getPort());
+//        server.awaitTermination();
     }
 
     @PreDestroy

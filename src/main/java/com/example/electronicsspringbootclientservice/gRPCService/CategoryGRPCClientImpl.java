@@ -1,8 +1,5 @@
 package com.example.electronicsspringbootclientservice.gRPCService;
 
-import com.example.electronicsspringbootclientservice.CategoryRequest;
-import com.example.electronicsspringbootclientservice.CategoryResponse;
-import com.example.electronicsspringbootclientservice.CategoryServiceGrpc;
 import com.example.electronicsspringbootclientservice.GrpcClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,9 +16,9 @@ public class CategoryGRPCClientImpl {
 
     private final GrpcClient grpcClient;
 
-    public CategoryResponse getCategory(CategoryRequest request) {
-        CategoryServiceGrpc.CategoryServiceBlockingStub stub = grpcClient.initCategoryServiceStub();
-        logger.info("received signal from grpc client >>> calling server");
-        return stub.getCategory(request);
-    }
+//    public Service.CategoryResponse getCategory(Service.CategoryRequest request) {
+////        CategoryServiceGrpc.CategoryServiceBlockingStub stub = grpcClient.initCategoryServiceStub();
+////        logger.info("received signal from grpc client >>> calling server");
+//        return stub.getCategory(request);
+//    }
 }

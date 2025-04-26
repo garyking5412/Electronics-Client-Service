@@ -1,0 +1,33 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_package= "grpc";
+
+service CategoryService {
+  rpc GetCategory(CategoryRequest) returns (CategoryResponse);
+  rpc Greeting(ConnectRequest) returns (stream GreetingResponse);
+  rpc Chat(stream ChatMessage) returns (stream ChatMessage);
+}
+
+message CategoryResponse {
+  int32 id = 1;
+  string name = 2;
+  string detail = 3;
+}
+
+message CategoryRequest {
+  int32 id = 1;
+}
+
+message ConnectRequest {
+  string clientId = 1;
+}
+
+message GreetingResponse {
+  string response = 1;
+}
+
+message ChatMessage {
+  string sender = 1;
+  string content = 2;
+  int64 timestamp = 3;
+}

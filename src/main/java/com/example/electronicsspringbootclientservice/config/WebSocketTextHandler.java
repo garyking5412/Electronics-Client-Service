@@ -10,7 +10,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
 
-@Service
+//@Service
 public class WebSocketTextHandler extends TextWebSocketHandler {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

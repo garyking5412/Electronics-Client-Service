@@ -1,12 +1,8 @@
 package com.example.electronicsspringbootclientservice.controller;
 
-import com.example.electronicsspringbootclientservice.CategoryRequest;
-import com.example.electronicsspringbootclientservice.CategoryResponse;
 import com.example.electronicsspringbootclientservice.DTO.CategoryDTO;
 import com.example.electronicsspringbootclientservice.gRPCService.CategoryGRPCClientImpl;
-import com.example.electronicsspringbootclientservice.model.Category;
 import com.example.electronicsspringbootclientservice.service.CategoryService;
-import com.example.electronicsspringbootclientservice.service.WebSocketService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -23,7 +19,7 @@ import java.util.List;
 public class CategoryController {
 
     private final CategoryService categoryService;
-    private final WebSocketService webSocketService;
+//    private final WebSocketService webSocketService;
     private final CategoryGRPCClientImpl categoryGRPCService;
     private final ModelMapper modelMapper;
 
@@ -35,7 +31,7 @@ public class CategoryController {
 
     @PostMapping("/web-socket/create")
     public void createViaWebSocket() throws JsonProcessingException {
-        webSocketService.createCategory();
+//        webSocketService.createCategory();
     }
 
     @GetMapping("/getById/{id}")
@@ -43,12 +39,12 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(categoryService.getCategoryById(id));
     }
 
-    @GetMapping("/getById/grpc/{id}")
-    public ResponseEntity<Category> getByIdGRpc(@PathVariable(name = "id") Integer id) {
-        CategoryRequest request = CategoryRequest.newBuilder().setId(id).build();
-        CategoryResponse response = categoryGRPCService.getCategory(request);
-        return ResponseEntity.status(HttpStatus.OK).body(modelMapper.map(response, Category.class));
-    }
+//    @GetMapping("/getById/grpc/{id}")
+//    public ResponseEntity<Category> getByIdGRpc(@PathVariable(name = "id") Integer id) {
+//        CategoryRequest request = CategoryRequest.newBuilder().setId(id).build();
+//        CategoryResponse response = categoryGRPCService.getCategory(request);
+//        return ResponseEntity.status(HttpStatus.OK).body(modelMapper.map(response, Category.class));
+//    }
 
     @PostMapping("/insert")
     public ResponseEntity<CategoryDTO> insert(@RequestBody @Valid CategoryDTO dto) {

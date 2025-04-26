@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.client.WebSocketConnectionManager;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 
-@Configuration
+//@Configuration
 public class WebSocketConfig {
 
     private final WebSocketTextHandler webSocketTextHandler;

@@ -1,11 +1,9 @@
 package com.example.electronicsspringbootclientservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-
 import lombok.Data;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Entity

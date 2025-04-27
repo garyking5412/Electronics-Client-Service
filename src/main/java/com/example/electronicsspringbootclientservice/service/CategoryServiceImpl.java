@@ -2,31 +2,32 @@ package com.example.electronicsspringbootclientservice.service;
 
 import com.example.electronicsspringbootclientservice.DTO.CategoryDTO;
 import com.example.electronicsspringbootclientservice.model.Category;
+import com.example.electronicsspringbootclientservice.model.Category2;
 import com.example.electronicsspringbootclientservice.repository.CategoryRepository;
-
-import javax.transaction.Transactional;
-
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
-import java.util.*;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 @Transactional
 @Slf4j
+@RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
+
+    private final MongoTemplate mongoTemplate;
 
     private static final Logger logger = LoggerFactory.getLogger(CategoryServiceImpl.class);
 
@@ -53,10 +54,10 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDTO insert(CategoryDTO categoryDTO) {
-        Category category = new Category();
+        Category2 category = new Category2();
         modelMapper.map(categoryDTO, category);
-        Category result = categoryRepository.save(category);
-        modelMapper.map(result, categoryDTO);
+        Category2 savedCategory = mongoTemplate.insert(category);
+        modelMapper.map(savedCategory, categoryDTO);
         return categoryDTO;
     }
 

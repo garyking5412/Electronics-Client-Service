@@ -1,13 +1,26 @@
-server:
-  port: 3001
-    #ssl:
-    #key-store-type: PKCS12
-    #key-store: classpath:localhost.p12
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, info
+  endpoint:
+    health:
+      show-details: always
+  server:
+    port: 3001
+      #ssl:
+      #key-store-type: PKCS12
+      #key-store: classpath:localhost.p12
     #key-alias: localhost
     #http2:
-  #enabled: true
+    #enabled: true
 
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  application:
+    name: client-spring-boot
   main:
     allow-bean-definition-overriding: true
     allow-circular-references: true
@@ -86,3 +99,16 @@ spring:
       host: localhost
       port: 27017
       database: Electronics
+
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        register: true
+        service-id: Electronics-Client-Service-01
+        health-check:
+          protocol: HTTP
+          uri: /actuator/health
+          interval: 5s
+

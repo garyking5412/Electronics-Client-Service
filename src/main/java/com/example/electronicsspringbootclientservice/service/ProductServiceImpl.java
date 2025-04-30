@@ -30,8 +30,8 @@ public class ProductServiceImpl implements ProductService {
 //    @Autowired
     private RedisService redisService;
 
-    @Autowired
-    private RabbitMQService rabbitMQService;
+//    @Autowired
+//    private RabbitMQService rabbitMQService;
 
     @Autowired
     private Gson gsonTemplate;
@@ -84,7 +84,7 @@ public class ProductServiceImpl implements ProductService {
         savedProducts.stream().map(ProductDTO::new).forEach(dto -> {
             redisService.saveProduct(dto);
         });
-        savedProducts.forEach(product -> rabbitMQService.send(gsonTemplate.toJson(product)));
+//        savedProducts.forEach(product -> rabbitMQService.send(gsonTemplate.toJson(product)));
     }
 
     @Override

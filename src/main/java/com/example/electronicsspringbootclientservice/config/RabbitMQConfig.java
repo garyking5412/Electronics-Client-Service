@@ -7,10 +7,10 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 public class RabbitMQConfig {
 
-    @Bean
+//    @Bean
     public CachingConnectionFactory connectionFactory() {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
         connectionFactory.setAddresses("localhost");
@@ -19,7 +19,7 @@ public class RabbitMQConfig {
         return connectionFactory;
     }
 
-    @Bean
+//    @Bean
     public Declarables rabbitQueueBindings() {
 //        Queue fanoutQueue1 = new Queue("fanout.queue1", false);
         Queue fanoutQueue1 = QueueBuilder.durable("fanout.queue1").withArgument("x-dead-letter-exchange", "fanout.queue1.dlx").withArgument("x-dead-letter-routing-key", "QUEUE_MESSAGES_DLQ").build();
@@ -31,27 +31,27 @@ public class RabbitMQConfig {
         );
     }
 
-    @Bean
+//    @Bean
     public Queue deadLetterQueue() {
         return QueueBuilder.durable("QUEUE_MESSAGES_DLQ").build();
     }
 
-    @Bean
+//    @Bean
     FanoutExchange deadLetterExchange2() {
         return new FanoutExchange("fanout.queue2.dlx");
     }
 
-    @Bean
+//    @Bean
     FanoutExchange deadLetterExchange1() {
         return new FanoutExchange("fanout.queue1.dlx");
     }
 
-    @Bean
+//    @Bean
     Declarables deadLetterBinding() {
         return new Declarables(BindingBuilder.bind(deadLetterQueue()).to(deadLetterExchange1()), BindingBuilder.bind(deadLetterQueue()).to(deadLetterExchange2()));
     }
 
-    @Bean
+//    @Bean
     public RabbitTemplate rabbitTemplate() {
         return new RabbitTemplate(connectionFactory());
     }

@@ -53,6 +53,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public CategoryDTO insert(CategoryDTO categoryDTO) {
         Category2 category = new Category2();
         modelMapper.map(categoryDTO, category);

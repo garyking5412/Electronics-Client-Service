@@ -20,7 +20,7 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
   application:
-    name: client-spring-boot
+    name: java-spring-minazuki
   main:
     allow-bean-definition-overriding: true
     allow-circular-references: true
@@ -107,6 +107,7 @@ spring:
       discovery:
         register: true
         service-id: Electronics-Client-Service-01
+        service-name: ${spring.application.name}
         health-check:
           protocol: HTTP
           uri: /actuator/health
